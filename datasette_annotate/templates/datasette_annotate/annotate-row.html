@@ -1,0 +1,33 @@
+{% extends "default:row.html" %}
+
+{% block title %}Annotating {{ super() }}{% endblock %}
+
+{% block content %}
+<h1 style="padding-left: 10px; border-left: 10px solid #{{ database_color(database) }}">Annotating {{ table }}: {{ ', '.join(primary_key_values) }}{% if private %} 🔒{% endif %}</h1>
+
+{% include custom_table_templates %}
+
+<pre>
+  DEBUG:
+  {{ annotation_labels }}
+</pre>
+
+<div class="annotation">
+<h2>Annotate this record</h2>
+<form action="" method="POST">
+    <input type="hidden" name="csrftoken" value="{{ csrftoken() }}">
+    <fieldset>
+      <legend>Select an annotation label:</legend>
+      {% for label in annotation_labels %}
+      <div>
+        <input type="radio" id="label-{{label}}" name="label" value="{{label}}">
+        <label for="label-{{label}}">{{label}}</label>
+      </div>
+      {% endfor %}
+    </fieldset>
+    <p><input type="submit" value="Submit"></p>
+  </form>
+</div>
+
+{% endblock %}
+
