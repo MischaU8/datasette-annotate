@@ -13,9 +13,48 @@ Install this plugin in the same environment as Datasette.
 
     datasette install datasette-annotate
 
+Only the [root actor](https://docs.datasette.io/en/stable/authentication.html#using-the-root-actor) will have access to create (write) annotations.
+
 ## Usage
 
-Usage instructions go here.
+You can start the annotation process by going to the `/database_name/table_name/-/annotate` page. This table should be configured to specify which annotation labels can be selected, see below. Annotations will be written to the table `table_name_annotations`.
+
+### Configuration
+
+To add annotations for a table it must have a primary key column. The possible labels for each table should be configured by adding the following settings to the `metadata.json`:
+
+```json
+{
+    "databases": {
+        "my_database": {
+            "tables": {
+                "training_data": {
+                    "plugins": {
+                        "datasette-annotate": {
+                            "labels": ["ABSTAIN", "HAM", "SPAM"]
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+```
+
+If you are using `metadata.yml` the configuration should look like this:
+
+```yaml
+databases:
+  my_database:
+    tables:
+      training_data:
+        plugins:
+          datasette-annotate:
+            labels:
+              - ABSTAIN
+              - HAM
+              - SPAM
+```
 
 ## Development
 
