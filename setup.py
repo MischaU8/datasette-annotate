@@ -27,15 +27,13 @@ setup(
     license="Apache License, Version 2.0",
     classifiers=[
         "Framework :: Datasette",
-        "License :: OSI Approved :: Apache Software License"
+        "License :: OSI Approved :: Apache Software License",
     ],
     version=VERSION,
     packages=["datasette_annotate"],
     entry_points={"datasette": ["datasette_annotate = datasette_annotate"]},
     install_requires=["datasette"],
     extras_require={"test": ["pytest", "pytest-asyncio"]},
-    package_data={
-        "datasette_annotate": ["templates/*"]
-    },
+    package_data={"datasette_annotate": ["templates/*"]},
     python_requires=">=3.7",
 )
