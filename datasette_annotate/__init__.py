@@ -1,3 +1,4 @@
+import sys
 import textwrap
 
 from datasette import hookimpl
@@ -8,7 +9,10 @@ from datasette.utils.asgi import Forbidden, NotFound, Response
 
 @hookimpl
 def permission_allowed(actor, action):
-    if action == "annotate-row" and actor and actor.get("id") == "root":
+    if action == "annotate-row" and (
+        (actor and actor.get("id") == "root") or (sys.platform == "emscripten")
+    ):
+        # running in Pyodide or other Emscripten based build
         return True
 
 
