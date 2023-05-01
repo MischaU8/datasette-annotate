@@ -1,7 +1,7 @@
 from setuptools import setup
 import os
 
-VERSION = "0.2"
+VERSION = "0.2.1"
 
 
 def get_long_description():
@@ -31,9 +31,9 @@ setup(
     ],
     version=VERSION,
     packages=["datasette_annotate"],
-    entry_points={"datasette": ["datasette_annotate = datasette_annotate"]},
-    install_requires=["datasette"],
+    entry_points={"datasette": ["annotate = datasette_annotate"]},
+    install_requires=["datasette>=0.64"],
     extras_require={"test": ["pytest", "pytest-asyncio"]},
-    package_data={"datasette_annotate": ["templates/*"]},
+    package_data={"datasette_annotate": ["templates/*.html"]},
     python_requires=">=3.7",
 )

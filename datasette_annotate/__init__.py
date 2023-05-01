@@ -82,7 +82,7 @@ def register_routes(datasette):
             return (
                 data,
                 template_data,
-                ("datasette_annotate/annotate-row.html",) + templates,
+                ("annotate-row.html",) + templates,
             )
 
         async def post(self, request, *args, **kwargs):
